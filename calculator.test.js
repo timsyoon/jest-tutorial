@@ -61,3 +61,39 @@ describe("Matcher tests", () => {
         expect(string1).not.toMatch(/abc/);
     });
 });
+
+describe("Hook tests", () => {
+    var input1 = 0;
+    var input2 = 0;
+
+    beforeAll(() => {
+        console.log("beforeAll called");
+    });
+    afterAll(() => {
+        console.log("afterAll called");
+    });
+    beforeEach(() => {
+        console.log("beforeEach called");
+        input1 = 10;
+        input2 = 20;
+    });
+    afterEach(() => {
+        console.log("afterEach called");
+    });
+
+    test("Adding 10 and 20 should return 30", () => {
+        // arrange and act
+        var result = mathOperations.sum(input1, input2);
+        
+        // For the next test, to check that beforeEach resets input1 and input2 correctly
+        input1 = 1;
+        input2 = 2;
+
+        // assert
+        expect(result).toBe(30);
+    });
+    test("To test beforeEach. input1 should be 10 and input2 should be 20", () => {
+        expect(input1).toBe(10);
+        expect(input2).toBe(20);
+    });
+});
