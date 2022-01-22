@@ -1,4 +1,4 @@
-const mathOperations = require("./calculator");
+const { mathOperations, throwException } = require("./calculator");
 
 describe("Calculator tests", () => {
     test("Adding 1 + 2 should return 3", () => {
@@ -59,6 +59,11 @@ describe("Matcher tests", () => {
         var string1 = "Dan took the deep dive down the rabbit hole"
         expect(string1).toMatch(/dive/);
         expect(string1).not.toMatch(/abc/);
+    });
+    test("Exception matchers", () => {
+        expect(throwException).toThrow();
+        expect(throwException).toThrowError();
+        expect(throwException).toThrowError("Some error message");
     });
 });
 
